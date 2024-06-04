@@ -4,7 +4,46 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/0Scenes/Scene 1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/0Scenes/Scene 0.unity
+    guid: dba393ba60ca67144a512bf2d56c296f
+  - enabled: 1
+    path: Assets/0Scenes/Scene 2.unity
+    guid: 6f848c409584efd41972db562c8c58c9
+  - enabled: 1
+    path: Assets/0Scenes/Scene 3.unity
+    guid: 837233afccf46ae49ac1771dd9f6ec9d
+  - enabled: 1
+    path: Assets/0Scenes/Scene 4.unity
+    guid: 4266a18936e399f4390ee8305b3bb40e
+  - enabled: 1
+    path: Assets/0Scenes/Scene 5.unity
+    guid: 53be3de91dc6c8440be39915c76ee114
+  - enabled: 1
+    path: Assets/0Scenes/Scene 6.unity
+    guid: bba3c305a9dd8e04d8fad0aeb0a3fdcb
+  - enabled: 1
+    path: Assets/0Scenes/Scene 7.unity
+    guid: 77c52989ef6f1b24d9f5a2b85370a594
+  - enabled: 1
+    path: Assets/0Scenes/Scene 8.unity
+    guid: 3b741853ae026ee4a8927b4f8dbea7ef
+  - enabled: 1
+    path: Assets/0Scenes/Scene 9.unity
+    guid: ec846b89d03e1724d9c50ef81dbbced4
+  - enabled: 1
+    path: Assets/0Scenes/Scene 10.unity
+    guid: c29a64448d4dceb49a162b2b49655f65
+  - enabled: 1
+    path: Assets/0Scenes/Scene 11.unity
+    guid: a6f0e95ccc9265945890a76c5eb53689
+  - enabled: 1
+    path: Assets/0Scenes/Scene 12.unity
+    guid: f40d120d2ef894647934178484d20092
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 3ac93e606fb39de4a9c8db84f1f57881, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2923b67a09d281a409c41e8e83f870fc, type: 2}
