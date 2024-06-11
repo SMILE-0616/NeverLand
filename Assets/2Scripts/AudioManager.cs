@@ -1,136 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // SceneManager를 사용하기 위해 추가
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    // 배경 음악과 대사를 담을 큐
+    Queue<AudioClip> backgroundMusicQueue = new Queue<AudioClip>();
+    Queue<AudioClip> dialogueQueue = new Queue<AudioClip>();
 
-    [Header("#BGM")]
-    public AudioClip bgmClip;
-    public float bgmVolume = 1.0f;
-    private AudioSource bgmPlayer;
+    // 현재 재생 중인 배경 음악과 대사의 AudioSource
+    AudioSource backgroundMusicSource;
+    AudioSource dialogueSource;
 
-    [Header("#SFX")]
-    public List<AudioClip> sfxClips; // 재생할 SFX 오디오 클립 리스트
-    public float sfxVolume = 1.0f;
-    private AudioSource sfxPlayer;
-    private Queue<AudioClip> sfxQueue;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            // BGM AudioSource 설정
-            bgmPlayer = gameObject.AddComponent<AudioSource>();
-            bgmPlayer.clip = bgmClip;
-            bgmPlayer.volume = bgmVolume;
-            bgmPlayer.loop = true;
-
-            // SFX AudioSource 설정
-            sfxPlayer = gameObject.AddComponent<AudioSource>();
-            sfxPlayer.volume = sfxVolume;
-
-            // SFX 큐 설정
-            sfxQueue = new Queue<AudioClip>(sfxClips);
-
-            // 씬 변경 이벤트 등록
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    // 배경 음악을 담을 AudioClip 배열
+    public AudioClip[] backgroundMusicClips;
+    // 대사를 담을 AudioClip 배열
+    public AudioClip[] dialogueClips;
 
     void Start()
     {
-        // BGM 재생
-        if (bgmPlayer.clip != null)
+        // AudioSource 컴포넌트를 가져와서 초기화
+        backgroundMusicSource = gameObject.AddComponent<AudioSource>();
+        dialogueSource = gameObject.AddComponent<AudioSource>();
+
+        // 배경 음악을 큐에 추가
+        foreach (var clip in backgroundMusicClips)
         {
-            bgmPlayer.Play();
-            Debug.Log("BGM 재생 시작");
+            backgroundMusicQueue.Enqueue(clip);
         }
-        else
+
+        // 대사를 큐에 추가
+        foreach (var clip in dialogueClips)
         {
-            Debug.LogError("BGM 클립이 설정되지 않았습니다.");
+            dialogueQueue.Enqueue(clip);
         }
+
+        // 첫 번째 배경 음악 재생
+        PlayNextBackgroundMusic();
     }
 
     void Update()
     {
-        // SFX 재생이 끝났을 때 다음 클립 재생
-        if (!sfxPlayer.isPlaying && sfxQueue.Count > 0)
+        // 대사 재생이 끝나면 다음 대사 재생
+        if (!dialogueSource.isPlaying && dialogueQueue.Count > 0)
         {
-            PlayNextSfx();
+            PlayNextDialogue();
         }
     }
 
-    public void PlayBgm(bool isPlay)
+    // 다음 배경 음악 재생
+    void PlayNextBackgroundMusic()
     {
-        if (isPlay)
+        if (backgroundMusicQueue.Count > 0)
         {
-            if (bgmPlayer.clip != null)
-            {
-                bgmPlayer.Play();
-                Debug.Log("BGM 재생 시작");
-            }
-            else
-            {
-                Debug.LogError("BGM 클립이 설정되지 않았습니다.");
-            }
-        }
-        else
-        {
-            bgmPlayer.Stop();
-            Debug.Log("BGM 재생 중지");
+            var nextClip = backgroundMusicQueue.Dequeue();
+            backgroundMusicSource.clip = nextClip;
+            backgroundMusicSource.loop = true; // 루프 재생
+            backgroundMusicSource.Play();
         }
     }
 
-    public void PlaySfx()
+    // 다음 대사 재생
+    void PlayNextDialogue()
     {
-        // SFX 큐가 비어 있지 않은 경우 재생
-        if (sfxQueue.Count > 0)
+        if (dialogueQueue.Count > 0)
         {
-            AudioClip nextClip = sfxQueue.Dequeue();
-            sfxPlayer.clip = nextClip;
-            sfxPlayer.Play();
+            var nextClip = dialogueQueue.Dequeue();
+            dialogueSource.clip = nextClip;
+            dialogueSource.Play();
         }
     }
 
-    private void PlayNextSfx()
-    {
-        if (sfxQueue.Count > 0)
-        {
-            AudioClip nextClip = sfxQueue.Dequeue();
-            sfxPlayer.clip = nextClip;
-            sfxPlayer.Play();
-        }
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // 씬이 변경되면 BGM과 SFX 재생 중지
-        if (bgmPlayer.isPlaying)
-        {
-            bgmPlayer.Stop();
-            Debug.Log("씬 변경으로 BGM 재생 중지");
-        }
-
-        if (sfxPlayer.isPlaying)
-        {
-            sfxPlayer.Stop();
-            Debug.Log("씬 변경으로 SFX 재생 중지");
-        }
-    }
-
+    // 씬이 변경될 때 호출되는 함수
     void OnDestroy()
     {
-        // 씬 변경 이벤트 해제
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // AudioSource 파괴
+        Destroy(backgroundMusicSource);
+        Destroy(dialogueSource);
     }
 }

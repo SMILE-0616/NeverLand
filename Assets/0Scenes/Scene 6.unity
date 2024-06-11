@@ -613,6 +613,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: dialogueClips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: dialogueClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8368b3fa03436604693ae93e00d8b5fa, type: 3}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: dialogueClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ffa2342ada6d7e4dbc0c7e51f69beaf, type: 3}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: dialogueClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b820b6b65d154554c81dbadf920b7c00, type: 3}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: dialogueClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 088cbe2e01e9e964fb9d335b68171243, type: 3}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: backgroundMusicClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231546287383471755, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
+      propertyPath: backgroundMusicClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b8b78228fa7eeef478ccaeb1caba98ae, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3deafadb32f1b9341b9e3f39c6da5758, type: 3}
 --- !u!1001 &1525733840
